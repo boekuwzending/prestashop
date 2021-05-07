@@ -1,0 +1,7 @@
+boekuwzending_order_create:
+  path: /boekuwzending/order/{orderId}
+  methods: [POST]
+  defaults:
+    _controller: 'Boekuwzending\PrestaShop\Controller\Admin\BoekuwzendingOrderController::createOrder'
+  requirements:
+    orderId: \d+

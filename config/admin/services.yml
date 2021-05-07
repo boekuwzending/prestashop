@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+
+  Boekuwzending\PrestaShop\Controller\Admin\BoekuwzendingOrderController:
+    class: Boekuwzending\PrestaShop\Controller\Admin\BoekuwzendingOrderController
+
+  Boekuwzending\PrestaShop\Service\BoekuwzendingClient:
+    class: Boekuwzending\PrestaShop\Service\BoekuwzendingClient
+
+  Boekuwzending\PrestaShop\Utils\AddressParser:
+    class: Boekuwzending\PrestaShop\Utils\AddressParser
+
+  Boekuwzending\PrestaShop\Repository\BoekuwzendingOrderRepository:
+    class: Boekuwzending\PrestaShop\Repository\BoekuwzendingOrderRepository
