@@ -32,19 +32,15 @@ class Boekuwzending extends CarrierModule
 
         $this->name = 'boekuwzending';
         $this->tab = 'shipping_logistics';
-        $this->version = '1.0.0';
-        $this->author = 'Boekuwzending';
-        $this->need_instance = 1;
-
-        /**
-         * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
-         */
+        $this->version = '1.0.1';
+        $this->author = 'Boekuwzending.com';
+        $this->need_instance = 0;
         $this->bootstrap = true;
 
         parent::__construct();
 
         $this->displayName = $this->l('Boekuwzending.com');
-        $this->description = $this->l('Add a description for your module to help merchants to understand what he should use your module for (200 characters maximum).');
+        $this->description = $this->l('Quickly integrate the activated shipping methods within your Boekuwzending.com account with PrestaShop.');
 
         $this->ps_versions_compliancy = array('min' => '1.7.7', 'max' => _PS_VERSION_);
     }

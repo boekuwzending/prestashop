@@ -30,7 +30,8 @@ class BoekuwzendingClient
     public function __construct(AddressParser $addressParser)
     {
         $this->addressParser = $addressParser;
-        $this->environment = \Configuration::get('BOEKUWZENDING_LIVE_MODE') === true ? Client::ENVIRONMENT_LIVE : Client::ENVIRONMENT_STAGING;
+        $liveMode = \Configuration::get('BOEKUWZENDING_LIVE_MODE');
+        $this->environment = filter_var($liveMode, FILTER_VALIDATE_BOOLEAN) === true ? Client::ENVIRONMENT_LIVE : Client::ENVIRONMENT_STAGING;
         $clientId = \Configuration::get('BOEKUWZENDING_CLIENT_ID');
         $clientSecret = \Configuration::get('BOEKUWZENDING_CLIENT_SECRET');
 
