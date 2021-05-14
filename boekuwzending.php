@@ -39,8 +39,8 @@ class Boekuwzending extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('Boekuwzending.com');
-        $this->description = $this->l('Quickly integrate the activated shipping methods within your Boekuwzending.com account with PrestaShop.');
+        $this->displayName = $this->trans('Boekuwzending.com', [], 'Modules.Boekuwzending.Boekuwzending');
+        $this->description = $this->trans('Automatically forward orders to your Boekuwzending.com account.', [], 'Modules.Boekuwzending.Boekuwzending');
 
         $this->ps_versions_compliancy = array('min' => '1.7.7', 'max' => _PS_VERSION_);
     }
@@ -195,56 +195,54 @@ class Boekuwzending extends CarrierModule
         return array(
             'form' => array(
                 'legend' => array(
-                    'title' => $this->l('Settings'),
+                    'title' => $this->trans('Settings', [], 'Modules.Boekuwzending.Configure'),
                     'icon' => 'icon-cogs',
                 ),
                 'input' => array(
                     array(
                         'type' => 'switch',
-                        'label' => $this->l('Live mode'),
+                        'label' => $this->trans('Live mode', [], 'Modules.Boekuwzending.Configure'),
                         'name' => 'BOEKUWZENDING_LIVE_MODE',
                         'is_bool' => true,
-                        'desc' => $this->l('Use this module in live mode'),
+                        'desc' => $this->trans('Use this module in live mode', [], 'Modules.Boekuwzending.Configure'),
                         'values' => array(
                             array(
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->l('Enabled')
+                                'label' => $this->trans('Enabled')
                             ),
                             array(
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->l('Disabled')
+                                'label' => $this->trans('Disabled')
                             )
                         ),
                     ),
                     array(
                         'col' => 3,
                         'type' => 'text',
-                        //'desc' => $this->l('Enter a valid email address'),
                         'name' => 'BOEKUWZENDING_CLIENT_ID',
-                        'label' => $this->l('Client ID'),
+                        'label' => $this->trans('Client ID', [], 'Modules.Boekuwzending.Configure'),
                         'required' => true,
                     ),
                     array(
                         'col' => 3,
                         'type' => 'text',
                         'name' => 'BOEKUWZENDING_CLIENT_SECRET',
-                        'label' => $this->l('Client Secret'),
+                        'label' => $this->trans('Client Secret', [], 'Modules.Boekuwzending.Configure'),
                         'required' => true,
                     ),
                     array(
                         'col' => 3,
                         'type' => 'text',
                         'prefix' => '<i class="icon icon-euro"></i>',
-                        //'desc' => $this->l('Enter a valid email address'),
                         'name' => 'BOEKUWZENDING_FIXED_PRICE',
-                        'label' => $this->l('Shipping cost without matrix'),
+                        'label' => $this->trans('Shipping cost without matrix', [], 'Modules.Boekuwzending.Configure'),
                         'required' => true,
                     ),
                 ),
                 'submit' => array(
-                    'title' => $this->l('Save'),
+                    'title' => $this->trans('Save'),
                 ),
             ),
         );
@@ -289,7 +287,7 @@ class Boekuwzending extends CarrierModule
     {
         $carrier = new Carrier();
 
-        $carrier->name = $this->l('Boekuwzending');
+        $carrier->name = $this->trans('Boekuwzending', [], 'Modules.Boekuwzending.Boekuwzending');
         $carrier->is_module = true;
         $carrier->active = 0;
         $carrier->range_behavior = 1;
@@ -300,7 +298,7 @@ class Boekuwzending extends CarrierModule
         $carrier->shipping_method = 2;
 
         foreach (Language::getLanguages() as $lang) {
-            $carrier->delay[$lang['id_lang']] = $this->l('Boekuwzending');
+            $carrier->delay[$lang['id_lang']] = $this->trans('Boekuwzending', [], 'Modules.Boekuwzending.Boekuwzending');
         }
 
         if (true === $carrier->add()) {

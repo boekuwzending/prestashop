@@ -45,14 +45,15 @@ class BoekuwzendingOrderController extends FrameworkBundleAdminController
 
             if (($result = $this->orderRepository->insert($orderId, $buzOrderId)) === true) {
                 PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): Boekuwzending order created, id: '" . $buzOrderId . "'", 1, null, 'Order', $orderId, true);
-                $this->addFlash('success', $this->trans("Successfully created an order at Boekuwzending", "Boekuwzending"));
+                $this->addFlash('success', $this->trans("Successfully created an order at Boekuwzending.", "Modules.Boekuwzending.Boekuwzendingordercontroller"));
             } else {
                 PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): could not save order: " . $result, 3, null, "Order", $orderId, true);
-                $this->addFlash('error', $this->trans("Failed to create an order at Boekuwzending: " . $result, "Boekuwzending"));
+                $this->addFlash('error', $this->trans("Failed to create an order at Boekuwzending: %error%", "Modules.Boekuwzending.Boekuwzendingordercontroller"));
             }
         } catch (Exception $ex) {
             PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): exception: " . $ex, 3, null, 'Order', $orderId, true);
-            $this->addFlash('error', $this->trans("Failed to create an order at Boekuwzending: ".  get_class($ex) . ": ". $ex->getMessage(), "Boekuwzending"));
+            $userError = $this->trans("Failed to create an order at Boekuwzending: %exType%: %exMessage%", "Modules.Boekuwzending.Boekuwzendingordercontroller", [ '%exType%' => get_class($ex), '%exMessage%' => $ex->getMessage() ]);
+            $this->addFlash('error', $userError);
         }
 
         return $this->redirectToRoute('admin_orders_view', [
