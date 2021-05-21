@@ -24,16 +24,22 @@ class BoekuwzendingOrderRepository
 
     /**
      * @throws PrestaShopDatabaseException
+     * @returns
      */
-    public function insert(int $prestaOrderId, string $buzOrderId): bool
+    public function insert(int $prestaOrderId, string $buzOrderId): mixed
     {
         $now = new DateTime();
         /** @noinspection PhpCastIsUnnecessaryInspection, UnnecessaryCastingInspection - PrestaShop requires it */
-        return $this->db->insert('boekuwzending_order', array(
+        if (!$this->db->insert('boekuwzending_order', array(
             'id_order' => (int)$prestaOrderId,
             'boekuwzending_external_order_id' => pSQL($buzOrderId),
             'created_datetime' => pSQL($now->format("Y-m-d H:i:s"))
-        ));
+        )))
+        {
+            return $this->db->getMsgError();
+        }
+
+        return true;
     }
 
     /**
