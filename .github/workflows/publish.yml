@@ -38,17 +38,17 @@ jobs:
       - name: Copy into "boekuwzending" directory
         run: |
 
-      - name: Copy into "../dist/boekuwzending/" directory
+      - name: Copy into "dist/boekuwzending/" directory
         run: |
-          mkdir -p ../dist/boekuwzending/
-          cp -r . ../dist/boekuwzending/
-          ls -al ../dist/boekuwzending/
+          mkdir -p dist/boekuwzending/
+          cp -r "$(ls -A | grep -v "dist/boekuwzending")" dist/boekuwzending/
+          ls -al dist/boekuwzending/
 
-      # Zip attempt 16
-      - name: Zip "../dist/boekuwzending" Release
+      # Zip attempt 17
+      - name: Zip "dist/boekuwzending" Release
         uses: thedoctor0/zip-release@master
         with:
-          directory: ../dist/
+          directory: dist
           filename: 'boekuwzending.zip'
           exclusions: '*.git* *.idea* /*docker/* config.xml'
 
