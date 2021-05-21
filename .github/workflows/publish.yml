@@ -35,14 +35,13 @@ jobs:
         run: |
           mkdir -p temp-to-zip/boekuwzending/
           ls -A | grep -v "temp-to-zip" | xargs cp -r -t temp-to-zip/boekuwzending/
-          ls -al temp-to-zip/boekuwzending/
 
       - name: Zip "temp-to-zip/boekuwzending" release
         uses: thedoctor0/zip-release@master
         with:
           directory: temp-to-zip
           filename: 'boekuwzending.zip'
-          exclusions: '*.git* *.idea* /*docker/* ./config.xml'
+          exclusions: '*.git* *.idea* /*docker/* *config.xml'
 
       - name: Upload PrestaShop zipped module
         uses: actions/upload-release-asset@v1
