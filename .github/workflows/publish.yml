@@ -1,0 +1,49 @@
+name: Build, package and release zip-file
+on:
+  push:
+jobs:
+  build-test:
+    name: Build, package and release zip-file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.3
+
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.ssh_key }}
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        env:
+          COMPOSER_AUTH: "${{ secrets.COMPOSER_AUTH }}"
+          COMPOSER_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: composer install --no-dev
+
+      # TODO: Zip
+
+      # - name: Upload release asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ github.event.release.upload_url }}
+      #     asset_path: ${{ github.workspace }}/boekuwzending-for-woocommerce.zip
+      #     asset_name: boekuwzending-for-woocommerce.zip
+      #     asset_content_type: application/zip
