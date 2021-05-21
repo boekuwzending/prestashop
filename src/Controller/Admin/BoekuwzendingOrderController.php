@@ -48,7 +48,7 @@ class BoekuwzendingOrderController extends FrameworkBundleAdminController
                 $this->addFlash('success', $this->trans("Successfully created an order at Boekuwzending.", "Modules.Boekuwzending.Boekuwzendingordercontroller"));
             } else {
                 PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): could not save order: " . $result, 3, null, "Order", $orderId, true);
-                $this->addFlash('error', $this->trans("Failed to create an order at Boekuwzending: %error%", "Modules.Boekuwzending.Boekuwzendingordercontroller"));
+                $this->addFlash('error', $this->trans("Failed to create an order at Boekuwzending: %error%", "Modules.Boekuwzending.Boekuwzendingordercontroller", [ '%error%' => $result ]));
             }
         } catch (Exception $ex) {
             PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): exception: " . $ex, 3, null, 'Order', $orderId, true);

@@ -28,4 +28,5 @@ $_MODULE['<{boekuwzending}prestashop>adminordertabcontent_26429fae075b2966b8110f
 
 $_MODULE['<{boekuwzending}prestashop>boekuwzendingordercontroller_095322390dda63ae6f6ef576555d23bc'] = 'Aanmaken van zending bij Boekuwzending mislukt: %exType%: %exMessage%';
 $_MODULE['<{boekuwzending}prestashop>boekuwzendingordercontroller_61a8a703d1d78c85d20b7b8a10c19770'] = 'Zending succesvol aangemaakt bij Boekuwzending.';
-$_MODULE['<{boekuwzending}prestashop>boekuwzendingordercontroller_696173857cf31d11d18c76fb6a1ffcfd'] = 'Zending kon niet worden aangemaakt bij Boekuwzending.';
+$_MODULE['<{boekuwzending}prestashop>boekuwzendingordercontroller_326d6c400b1d1b2be5b9f07c1dd4e7f0'] = 'Zending kon niet worden aangemaakt bij Boekuwzending: %error%';
+
