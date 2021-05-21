@@ -1,8 +1,9 @@
 name: Build, package and release zip-file
 on:
-  push:
+  release:
+    types: [published]
 jobs:
-  build-test:
+  build-and-zip:
     name: Build, package and release zip-file
     runs-on: ubuntu-latest
     steps:
@@ -41,20 +42,19 @@ jobs:
           ls -A | grep -v "temp-to-zip" | xargs cp -r -t temp-to-zip/boekuwzending/
           ls -al temp-to-zip/boekuwzending/
 
-      # Zip attempt 24
-      - name: Zip "temp-to-zip/boekuwzending" Release
+      - name: Zip "temp-to-zip/boekuwzending" release
         uses: thedoctor0/zip-release@master
         with:
           directory: temp-to-zip
           filename: 'boekuwzending.zip'
           exclusions: '*.git* *.idea* /*docker/* config.xml'
 
-      # - name: Upload release asset
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ github.event.release.upload_url }}
-      #     asset_path: ${{ github.workspace }}/boekuwzending-for-woocommerce.zip
-      #     asset_name: boekuwzending-for-woocommerce.zip
-      #     asset_content_type: application/zip
+      - name: Upload PrestaShop zipped module
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ github.workspace }}/temp-to-zip/boekuwzending.zip
+          asset_name: boekuwzending.zip
+          asset_content_type: application/zip
