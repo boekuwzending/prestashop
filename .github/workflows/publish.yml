@@ -44,13 +44,13 @@ jobs:
           cp -r . ../dist/boekuwzending/
           ls -al ../dist/boekuwzending/
 
-      # Zip attempt 15
+      # Zip attempt 16
       - name: Zip "../dist/boekuwzending" Release
         uses: thedoctor0/zip-release@master
         with:
-          path: ../dist/
+          directory: ../dist/
           filename: 'boekuwzending.zip'
-          exclusions: '*.git* /*docker/* config.xml'
+          exclusions: '*.git* *.idea* /*docker/* config.xml'
 
       # - name: Upload release asset
       #   uses: actions/upload-release-asset@v1
