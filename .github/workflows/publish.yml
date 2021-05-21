@@ -31,11 +31,6 @@ jobs:
           COMPOSER_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: composer install --no-dev --optimize-autoloader
 
-      - name: Install Composer dependencies
-        env:
-          COMPOSER_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: composer install --no-dev --optimize-autoloader
-
       - name: Copy into "temp-to-zip/boekuwzending/" directory
         run: |
           mkdir -p temp-to-zip/boekuwzending/
