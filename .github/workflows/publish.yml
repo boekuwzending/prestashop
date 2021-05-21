@@ -15,11 +15,11 @@ jobs:
         with:
           php-version: 7.3
 
-      - name: Get composer cache directory
+      - name: Get Composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Cache composer dependencies
+      - name: Cache Composer dependencies
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
@@ -36,12 +36,15 @@ jobs:
           mkdir -p temp-to-zip/boekuwzending/
           ls -A | grep -v "temp-to-zip" | xargs cp -r -t temp-to-zip/boekuwzending/
 
+      - name: Copy the template "index.php" to all subdirectories
+        run: find "temp-to-zip/boekuwzending/" -type d -exec cp "dist/index.php" {} \;
+
       - name: Zip "temp-to-zip/boekuwzending" release
         uses: thedoctor0/zip-release@master
         with:
           directory: temp-to-zip
           filename: 'boekuwzending.zip'
-          exclusions: '*.git* *.idea* /*docker/* *config.xml'
+          exclusions: '*.git* *.idea* /*dist/* /*docker/* *config.xml'
 
       - name: Upload PrestaShop zipped module
         uses: actions/upload-release-asset@v1
