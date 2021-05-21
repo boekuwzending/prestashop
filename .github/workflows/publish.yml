@@ -14,11 +14,6 @@ jobs:
         with:
           php-version: 7.3
 
-      - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: ${{ secrets.ssh_key }}
-
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -32,9 +27,8 @@ jobs:
 
       - name: Install Composer dependencies
         env:
-          COMPOSER_AUTH: "${{ secrets.COMPOSER_AUTH }}"
           COMPOSER_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: composer install --no-dev
+        run: composer install --no-dev --optimize-autoloader
 
       # TODO: Zip
 
