@@ -2,7 +2,7 @@
 <module>
     <name>boekuwzending</name>
     <displayName><![CDATA[Boekuwzending.com]]></displayName>
-    <version><![CDATA[1.0.1]]></version>
+    <version><![CDATA[1.0.2]]></version>
     <description><![CDATA[Quickly integrate the activated shipping methods within your Boekuwzending.com account with PrestaShop.]]></description>
     <author><![CDATA[Boekuwzending.com]]></author>
     <tab><![CDATA[shipping_logistics]]></tab>

@@ -32,7 +32,7 @@ class Boekuwzending extends CarrierModule
 
         $this->name = 'boekuwzending';
         $this->tab = 'shipping_logistics';
-        $this->version = '1.0.1';
+        $this->version = '1.0.2';
         $this->author = 'Boekuwzending.com';
         $this->need_instance = 0;
         $this->bootstrap = true;
