@@ -30,7 +30,24 @@ jobs:
           COMPOSER_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: composer install --no-dev --optimize-autoloader
 
-      # TODO: Zip
+      - name: Install Composer dependencies
+        env:
+          COMPOSER_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Copy into "boekuwzending" directory
+        run: |
+          mkdir -p ${{ github.workspace }}/dist/boekuwzending/
+          cp -r ${{ github.workspace }} ${{ github.workspace }}/dist/boekuwzending/
+          ls -al ${{ github.workspace }}/dist/boekuwzending/
+
+      # Zip attempt 1
+      - name: Zip "boekuwzending" Release
+        uses: thedoctor0/zip-release@master
+        with:
+          path: ${{ github.workspace }}/dist/
+          filename: 'boekuwzending.zip'
+          exclusions: '*.git* /*docker/* config.xml'
 
       # - name: Upload release asset
       #   uses: actions/upload-release-asset@v1
