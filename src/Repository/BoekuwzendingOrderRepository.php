@@ -4,7 +4,6 @@ namespace Boekuwzending\PrestaShop\Repository;
 
 use Boekuwzending\PrestaShop\ViewModels\BoekuwzendingOrder;
 use DateTime;
-use DateTimeZone;
 use Db;
 use DbQuery;
 use Exception;
@@ -24,22 +23,22 @@ class BoekuwzendingOrderRepository
 
     /**
      * @throws PrestaShopDatabaseException
-     * @returns
+     * @return bool|string
      */
-    public function insert(int $prestaOrderId, string $buzOrderId): mixed
+    public function insert(int $prestaOrderId, string $buzOrderId)
     {
         $now = new DateTime();
+
         /** @noinspection PhpCastIsUnnecessaryInspection, UnnecessaryCastingInspection - PrestaShop requires it */
-        if (!$this->db->insert('boekuwzending_order', array(
+        $insertResult = $this->db->insert('boekuwzending_order', array(
             'id_order' => (int)$prestaOrderId,
             'boekuwzending_external_order_id' => pSQL($buzOrderId),
             'created_datetime' => pSQL($now->format("Y-m-d H:i:s"))
-        )))
-        {
-            return $this->db->getMsgError();
-        }
+        ));
 
-        return true;
+        return $insertResult === true
+            ? true
+            : $this->db->getMsgError();
     }
 
     /**

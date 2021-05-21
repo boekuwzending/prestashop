@@ -43,12 +43,12 @@ class BoekuwzendingOrderController extends FrameworkBundleAdminController
             $buzOrder = $this->boekuwzendingClient->createOrder($order);
             $buzOrderId = $buzOrder->getId();
 
-            if ($this->orderRepository->insert($orderId, $buzOrderId)) {
+            if (($result = $this->orderRepository->insert($orderId, $buzOrderId)) === true) {
                 PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): Boekuwzending order created, id: '" . $buzOrderId . "'", 1, null, 'Order', $orderId, true);
                 $this->addFlash('success', $this->trans("Successfully created an order at Boekuwzending", "Boekuwzending"));
             } else {
-                PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): could not save order", 3, null, "Order", $orderId, true);
-                $this->addFlash('error', $this->trans("Failed to create an order at Boekuwzending.", "Boekuwzending"));
+                PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): could not save order: " . $result, 3, null, "Order", $orderId, true);
+                $this->addFlash('error', $this->trans("Failed to create an order at Boekuwzending: " . $result, "Boekuwzending"));
             }
         } catch (Exception $ex) {
             PrestaShopLogger::addLog("BoekuwzendingOrderController::createOrder(): exception: " . $ex, 3, null, 'Order', $orderId, true);
