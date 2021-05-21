@@ -47,7 +47,7 @@ jobs:
         with:
           directory: temp-to-zip
           filename: 'boekuwzending.zip'
-          exclusions: '*.git* *.idea* /*docker/* config.xml'
+          exclusions: '*.git* *.idea* /*docker/* ./config.xml'
 
       - name: Upload PrestaShop zipped module
         uses: actions/upload-release-asset@v1
@@ -55,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{ github.workspace }}/temp-to-zip/boekuwzending.zip
+          asset_path: temp-to-zip/boekuwzending.zip
           asset_name: boekuwzending.zip
           asset_content_type: application/zip
