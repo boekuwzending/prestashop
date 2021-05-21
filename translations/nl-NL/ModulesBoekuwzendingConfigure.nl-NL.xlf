@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="modules/boekuwzending/boekuwzending.php" source-language="en" target-language="nl" datatype="plaintext">
+    <body>
+      <trans-unit id="cebd5bbe0ffdecc270a8a324e5a277dd" approved="yes">
+        <source>Live mode</source>
+        <target state="final">Live-modus (XLF4)</target>
+        <note>Line: 204</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
