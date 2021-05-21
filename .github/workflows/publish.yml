@@ -35,17 +35,17 @@ jobs:
           COMPOSER_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: composer install --no-dev --optimize-autoloader
 
-      - name: Copy into "dist/boekuwzending/" directory
+      - name: Copy into "temp-to-zip/boekuwzending/" directory
         run: |
-          mkdir -p dist/boekuwzending/
-          ls -A | grep -v "dist/boekuwzending" | xargs cp -r -t dist/boekuwzending/
-          ls -al dist/boekuwzending/
+          mkdir -p temp-to-zip/boekuwzending/
+          ls -A | grep -v "temp-to-zip" | xargs cp -r -t temp-to-zip/boekuwzending/
+          ls -al temp-to-zip/boekuwzending/
 
-      # Zip attempt 23
-      - name: Zip "dist/boekuwzending" Release
+      # Zip attempt 24
+      - name: Zip "temp-to-zip/boekuwzending" Release
         uses: thedoctor0/zip-release@master
         with:
-          directory: dist
+          directory: temp-to-zip
           filename: 'boekuwzending.zip'
           exclusions: '*.git* *.idea* /*docker/* config.xml'
 
