@@ -37,15 +37,18 @@ jobs:
 
       - name: Copy into "boekuwzending" directory
         run: |
-          mkdir -p ${{ github.workspace }}/dist/boekuwzending/
-          cp -r ${{ github.workspace }} ${{ github.workspace }}/dist/boekuwzending/
-          ls -al ${{ github.workspace }}/dist/boekuwzending/
 
-      # Zip attempt 1
-      - name: Zip "boekuwzending" Release
+      - name: Copy into "../dist/boekuwzending/" directory
+        run: |
+          mkdir -p ../dist/boekuwzending/
+          cp -r . ../dist/boekuwzending/
+          ls -al ../dist/boekuwzending/
+
+      # Zip attempt 15
+      - name: Zip "../dist/boekuwzending" Release
         uses: thedoctor0/zip-release@master
         with:
-          path: ${{ github.workspace }}/dist/
+          path: ../dist/
           filename: 'boekuwzending.zip'
           exclusions: '*.git* /*docker/* config.xml'
 
